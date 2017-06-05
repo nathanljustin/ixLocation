@@ -8,22 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		994E7A291EE5722300D92AFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A281EE5722300D92AFF /* AppDelegate.swift */; };
-		994E7A2B1EE5722300D92AFF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A2A1EE5722300D92AFF /* FirstViewController.swift */; };
+		994E7A2B1EE5722300D92AFF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A2A1EE5722300D92AFF /* MapViewController.swift */; };
 		994E7A2D1EE5722300D92AFF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A2C1EE5722300D92AFF /* SecondViewController.swift */; };
 		994E7A301EE5722300D92AFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994E7A2E1EE5722300D92AFF /* Main.storyboard */; };
 		994E7A321EE5722300D92AFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 994E7A311EE5722300D92AFF /* Assets.xcassets */; };
 		994E7A351EE5722300D92AFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994E7A331EE5722300D92AFF /* LaunchScreen.storyboard */; };
+		994E7A3D1EE573C900D92AFF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A3C1EE573C900D92AFF /* SettingsViewController.swift */; };
+		994E7A3F1EE581D100D92AFF /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A3E1EE581D100D92AFF /* AddViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		994E7A251EE5722300D92AFF /* ixLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ixLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		994E7A281EE5722300D92AFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		994E7A2A1EE5722300D92AFF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		994E7A2A1EE5722300D92AFF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		994E7A2C1EE5722300D92AFF /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		994E7A2F1EE5722300D92AFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		994E7A311EE5722300D92AFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		994E7A341EE5722300D92AFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		994E7A361EE5722300D92AFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		994E7A3C1EE573C900D92AFF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		994E7A3E1EE581D100D92AFF /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +61,11 @@
 			isa = PBXGroup;
 			children = (
 				994E7A281EE5722300D92AFF /* AppDelegate.swift */,
-				994E7A2A1EE5722300D92AFF /* FirstViewController.swift */,
+				994E7A2A1EE5722300D92AFF /* MapViewController.swift */,
 				994E7A2C1EE5722300D92AFF /* SecondViewController.swift */,
 				994E7A2E1EE5722300D92AFF /* Main.storyboard */,
+				994E7A3E1EE581D100D92AFF /* AddViewController.swift */,
+				994E7A3C1EE573C900D92AFF /* SettingsViewController.swift */,
 				994E7A311EE5722300D92AFF /* Assets.xcassets */,
 				994E7A331EE5722300D92AFF /* LaunchScreen.storyboard */,
 				994E7A361EE5722300D92AFF /* Info.plist */,
@@ -139,9 +145,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994E7A3F1EE581D100D92AFF /* AddViewController.swift in Sources */,
 				994E7A2D1EE5722300D92AFF /* SecondViewController.swift in Sources */,
 				994E7A291EE5722300D92AFF /* AppDelegate.swift in Sources */,
-				994E7A2B1EE5722300D92AFF /* FirstViewController.swift in Sources */,
+				994E7A2B1EE5722300D92AFF /* MapViewController.swift in Sources */,
+				994E7A3D1EE573C900D92AFF /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
