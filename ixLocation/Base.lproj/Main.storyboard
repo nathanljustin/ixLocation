@@ -352,7 +352,7 @@
         <!--Maps-->
         <scene sceneID="32g-PH-OH9">
             <objects>
-                <tableViewController id="KZR-oh-BXH" sceneMemberID="viewController">
+                <tableViewController id="KZR-oh-BXH" customClass="MapSettingsViewController" customModule="ixLocation" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hMv-P9-c8I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -23,25 +23,13 @@ class SettingsViewController: UITableViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         name.text = UserDefaults.standard.string(forKey: "name")
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 1 && indexPath.row == 1 {
-            self.tabBarController?.selectedIndex = 0
-        }
-        
-        if indexPath.section == 1 && indexPath.row == 1 {
-            self.tabBarController?.selectedIndex = 1
-        }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
