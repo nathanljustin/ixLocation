@@ -45,7 +45,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         setMapType()
+        
     }
 
     override func didReceiveMemoryWarning() {
