@@ -9,16 +9,26 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    @IBOutlet weak var map: MapViewController!
+    @IBOutlet weak var map: MKMapView!
     
     var locationManager: CLLocationManager!
     var currentUserLocation: CLLocation!
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // A region represents the area of the map that we want to view
+        // It consists of a location (CLLocationCoordinate2D) and a Span (MKCoordinateSpanMak)
+        let location = CLLocationCoordinate2D(latitude: -33.918861,longitude: 18.423300)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegion(center: location, span: span)
+        map.setRegion(region, animated: true)
+        
+        // Always show the users location
+        map.showsUserLocation = true
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -29,6 +39,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         }
+        
+        setMapType()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        setMapType()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +75,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     {
         // An error occurred trying to retrieve users location
         print("Error \(error)")
+    }
+    
+    func setMapType() {
+        let mapType = UserDefaults.standard.string(forKey: "mapType")
+        
+        if mapType != nil {
+            
+            if mapType == "hybrid" {
+                map.mapType = .hybrid
+            }
+            
+            if mapType == "satellite" {
+                map.mapType = .satellite
+            }
+            
+            if mapType == "standard" {
+                map.mapType = .standard
+            }
+        }
     }
     
 }

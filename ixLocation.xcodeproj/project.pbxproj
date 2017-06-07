@@ -15,6 +15,12 @@
 		994E7A351EE5722300D92AFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994E7A331EE5722300D92AFF /* LaunchScreen.storyboard */; };
 		994E7A3D1EE573C900D92AFF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A3C1EE573C900D92AFF /* SettingsViewController.swift */; };
 		994E7A3F1EE581D100D92AFF /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994E7A3E1EE581D100D92AFF /* AddViewController.swift */; };
+		9960DF0B1EE6FB2A00F54446 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960DF0A1EE6FB2A00F54446 /* Activity.swift */; };
+		9960DF0D1EE6FBB600F54446 /* GeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960DF0C1EE6FBB600F54446 /* GeoPoint.swift */; };
+		9960DF131EE7032700F54446 /* AddDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960DF121EE7032700F54446 /* AddDelegate.swift */; };
+		9960DF151EE7A8BF00F54446 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960DF141EE7A8BF00F54446 /* ActivityViewController.swift */; };
+		99FB81C01EE6CF8400B00676 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB81BF1EE6CF8400B00676 /* ProfileSettingsViewController.swift */; };
+		99FB81C21EE6E16F00B00676 /* MapSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB81C11EE6E16F00B00676 /* MapSettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,12 @@
 		994E7A361EE5722300D92AFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994E7A3C1EE573C900D92AFF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		994E7A3E1EE581D100D92AFF /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		9960DF0A1EE6FB2A00F54446 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		9960DF0C1EE6FBB600F54446 /* GeoPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
+		9960DF121EE7032700F54446 /* AddDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDelegate.swift; sourceTree = "<group>"; };
+		9960DF141EE7A8BF00F54446 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		99FB81BF1EE6CF8400B00676 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
+		99FB81C11EE6E16F00B00676 /* MapSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +73,15 @@
 			isa = PBXGroup;
 			children = (
 				994E7A281EE5722300D92AFF /* AppDelegate.swift */,
+				9960DF121EE7032700F54446 /* AddDelegate.swift */,
+				9960DF0A1EE6FB2A00F54446 /* Activity.swift */,
+				9960DF0C1EE6FBB600F54446 /* GeoPoint.swift */,
 				994E7A2A1EE5722300D92AFF /* MapViewController.swift */,
 				994E7A2C1EE5722300D92AFF /* ActivityLogViewController.swift */,
+				9960DF141EE7A8BF00F54446 /* ActivityViewController.swift */,
 				994E7A2E1EE5722300D92AFF /* Main.storyboard */,
+				99FB81C11EE6E16F00B00676 /* MapSettingsViewController.swift */,
+				99FB81BF1EE6CF8400B00676 /* ProfileSettingsViewController.swift */,
 				994E7A3E1EE581D100D92AFF /* AddViewController.swift */,
 				994E7A3C1EE573C900D92AFF /* SettingsViewController.swift */,
 				994E7A311EE5722300D92AFF /* Assets.xcassets */,
@@ -145,11 +163,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99FB81C21EE6E16F00B00676 /* MapSettingsViewController.swift in Sources */,
 				994E7A3F1EE581D100D92AFF /* AddViewController.swift in Sources */,
+				99FB81C01EE6CF8400B00676 /* ProfileSettingsViewController.swift in Sources */,
 				994E7A2D1EE5722300D92AFF /* ActivityLogViewController.swift in Sources */,
 				994E7A291EE5722300D92AFF /* AppDelegate.swift in Sources */,
 				994E7A2B1EE5722300D92AFF /* MapViewController.swift in Sources */,
+				9960DF0D1EE6FBB600F54446 /* GeoPoint.swift in Sources */,
+				9960DF0B1EE6FB2A00F54446 /* Activity.swift in Sources */,
+				9960DF131EE7032700F54446 /* AddDelegate.swift in Sources */,
 				994E7A3D1EE573C900D92AFF /* SettingsViewController.swift in Sources */,
+				9960DF151EE7A8BF00F54446 /* ActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
