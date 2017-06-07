@@ -8,25 +8,13 @@
 
 import UIKit
 
-class ActivityLogViewController: UITableViewController {
+class ActivityLogViewController: UITableViewController, AddDelegate {
 
     var activities: [Activity] = []
-    var currentIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        if UserDefaults.standard.array(forKey: "activities") != nil {
-            activities = UserDefaults.standard.array(forKey: "activities") as! [Activity]
-        }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if UserDefaults.standard.array(forKey: "activities") != nil {
-            activities = UserDefaults.standard.array(forKey: "activities") as! [Activity]
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,30 +31,58 @@ class ActivityLogViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
         
         // Configure the cell...
-        cell.textLabel?.text = activities[indexPath.item].name
-        cell.detailTextLabel?.text = activities[indexPath.item].description
+        cell.nameLabel.text = activities[indexPath.row].name
         
-        return cell
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        cell.dateLabel.text = formatter.string(from: date)
+        
+        cell.locationLabel.text = "here" // Figure this out...
+        
+        // Choose picture here...
+        
+        return cell as UITableViewCell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        currentIndex = indexPath.row
-        performSegue(withIdentifier: "activitySegue", sender: Any?.self)
-        
+    func didSaveActivity(activity: Activity) {
+        activities.append(activity)
+        self.tableView.reloadData() // will call table view functions again
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "activitySegue" {
-            let activityVC = segue.destination as! ActivityViewController
-            if activities.count > 0 {
-                activityVC.activity = activities[currentIndex]
-            }
+        if segue.identifier == "activityDetailSegue" {
+            let activityViewController = segue.destination as! ActivityViewController
+            
+            // Get indexPath of the cell selected
+            let cell = sender as! UITableViewCell
+            let indexPath = self.tableView.indexPath(for: cell)
+            
+            // Pass that activity to ActivityDetailViewController
+            activityViewController.activity = activities[(indexPath?.row)!]
+        }
+        if segue.identifier == "addSegue" {
+            let navigationViewController = segue.destination as! UINavigationController
+            
+            let addViewController = navigationViewController.topViewController as! AddViewController
+            
+            addViewController.delegate = self
         }
     }
     
 }
+
+class ActivityTableViewCell: UITableViewCell {
+    
+    //@IBOutlet weak var imageCellView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    
+}
+
+
 

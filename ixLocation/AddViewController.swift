@@ -14,31 +14,14 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
     
-    //var delegate: AddDelegate?
-    var newActivity: Activity = Activity()!
-    var activities: [Activity]!
+    var delegate: AddDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if UserDefaults.standard.array(forKey: "activities") != nil{
-            activities = UserDefaults.standard.array(forKey: "activities") as? [Activity]
-        }
-        else {
-            activities = []
-        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if UserDefaults.standard.array(forKey: "activities") != nil{
-            activities = UserDefaults.standard.array(forKey: "activities") as? [Activity]
-        }
-        else {
-            activities = []
-        }
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,27 +29,30 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     
     @IBAction func cancelAction(_ sender: Any) {
-        //delegate?.didCancelActivity()
         dismiss(animated: true, completion: nil)
     }
 
     
     @IBAction func saveAction(_ sender: Any) {
         
-        if nameTextField.text != nil && descriptionTextView.text != nil && imageView.image != nil {
+        if (nameTextField.text?.isEmpty)! || (descriptionTextView.text?.isEmpty)! {
+            // Throw an error
+            let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
             
-            newActivity.name = nameTextField.text!
-            newActivity.description = descriptionTextView.text
-        
-            // Will implement these once I know how to get user imput for these...
-            newActivity.location = GeoPoint(latitude: 0.0, longitude: 0.0)
-            newActivity.image = imageView.image
-        
-            activities.append(newActivity)
-        
-            UserDefaults.standard.set(activities, forKey: "activities")
-        
-            dismiss(animated: true, completion: nil)
+            let alertController = UIAlertController(title: "Error", message: "Please enter some text", preferredStyle: .alert)
+            
+            // Now adding the default action to the alert controller
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        } else {
+            
+            let newActivity = Activity(name: nameTextField.text, description: descriptionTextView.text)
+            
+            delegate?.didSaveActivity(activity: newActivity!) // Use delegate
+            
+            self.dismiss(animated: true, completion:  nil)
         }
     }
     

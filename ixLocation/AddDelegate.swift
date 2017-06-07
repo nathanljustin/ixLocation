@@ -10,5 +10,4 @@ import UIKit
 
 protocol AddDelegate {
     func didSaveActivity(activity: Activity)
-    func didCancelActivity()
 }
