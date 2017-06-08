@@ -9,12 +9,13 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, AddDelegate {
     
     @IBOutlet weak var map: MKMapView!
     
     var locationManager: CLLocationManager!
     var currentUserLocation: CLLocation!
+    var activities: [Activity] = []
 
     override func viewDidLoad() {
         
@@ -94,6 +95,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 map.mapType = .standard
             }
         }
+    }
+    
+    func didSaveActivity(activity: Activity) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2DMake((activity.location.lat), (activity.location.lng));
+        annotation.title = activity.name
+        map.addAnnotation(annotation)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let navigationViewController = segue.destination as! UINavigationController
+        
+        let addViewController = navigationViewController.topViewController as! AddViewController
+        
+        addViewController.delegate = self
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate
+        userLocation: MKUserLocation) {
+        map.centerCoordinate = userLocation.location!.coordinate
     }
     
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Gloss
+import Alamofire
 
 class ActivityLogViewController: UITableViewController, AddDelegate {
 
@@ -15,6 +17,8 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +45,7 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
         formatter.dateFormat = "dd.MM.yyyy"
         cell.dateLabel.text = formatter.string(from: date)
         
-        cell.locationLabel.text = activities[indexPath.row].location.name
+        cell.locationLabel.text = activities[indexPath.row].locationName
         
         // Choose picture here...
         

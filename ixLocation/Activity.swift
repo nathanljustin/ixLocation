@@ -14,12 +14,14 @@ class Activity {
     var name: String
     var description: String
     var image: UIImage?
-    var location: MKMapItem
+    var location: GeoPoint
+    var locationName: String
     
-    init?(name: String?, description: String?, location: MKMapItem) {
+    init?(name: String?, description: String?, location: GeoPoint, locationName: String?) {
         self.name = name!
         self.description = description!
         self.image = nil
         self.location = location
+        self.locationName = locationName!
     }
 }
