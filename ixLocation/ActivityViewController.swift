@@ -24,7 +24,7 @@ class ActivityViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         nameLabel.text = activity?.name
         descriptionLabel.text = activity?.description
-        locationLabel.text = activity?.location.name
+        locationLabel.text = activity?.locationName
         image.image = activity?.image
     }
 
