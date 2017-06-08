@@ -19,11 +19,12 @@ class ActivityViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         nameLabel.text = activity?.name
         descriptionLabel.text = activity?.description
-        locationLabel.text = "default" //need to fill in
+        locationLabel.text = activity?.location.name
         image.image = activity?.image
     }
 
