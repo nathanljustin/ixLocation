@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
 class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate {
     
@@ -72,7 +73,17 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             let newActivity = Activity(name: nameTextField.text, description: descriptionTextView.text, location: geo, locationName: matchingItem?.name)
             
-            delegate?.didSaveActivity(activity: newActivity!)
+            Alamofire.request("https://ixlocation-689b0.firebaseio.com/activities.json", method: .post, parameters: newActivity?.toJSON(), encoding: JSONEncoding.default).responseJSON { response in
+                
+                switch response.result {
+                case .success(let _):
+                    self.delegate?.didSaveActivity(activity: newActivity!)
+                    self.dismiss(animated: true, completion: nil)
+                case .failure: break
+                    // Failure... handle error
+                }
+                
+            }
             
             self.dismiss(animated: true, completion:  nil)
         }
@@ -125,21 +136,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                 
                 self.matchingItem = response!.mapItems[0]
                 print("Matching item = \(String(describing: self.matchingItem))")
-                
-                /*
-                for item in response!.mapItems {
-                    print("Name = \(String(describing: item.name))")
-                    //print("Phone = \(item.phoneNumber)")
-                    
-                    addVC.matchingItems.append(item)
-                    print("\(String(describing: self.matchingItems[0].name))")
-                }
-            }
- */
             }
         })
-        
-         //print("Matching items = \(self.matchingItems.count)")
  
     }
 }
