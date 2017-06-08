@@ -41,7 +41,7 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
         formatter.dateFormat = "dd.MM.yyyy"
         cell.dateLabel.text = formatter.string(from: date)
         
-        cell.locationLabel.text = "here" // Figure this out...
+        cell.locationLabel.text = activities[indexPath.row].location.name
         
         // Choose picture here...
         

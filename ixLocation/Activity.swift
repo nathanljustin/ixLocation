@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import MapKit
 
 class Activity {
     
     var name: String
     var description: String
     var image: UIImage?
-    var location: GeoPoint
+    var location: MKMapItem
     
-    init?(name: String?, description: String?) {
+    init?(name: String?, description: String?, location: MKMapItem) {
         self.name = name!
         self.description = description!
         self.image = nil
-        self.location = GeoPoint(latitude: 0.0, longitude: 0.0)
+        self.location = location
     }
 }

@@ -7,21 +7,24 @@
 //
 
 import UIKit
+import MapKit
 
-class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var locationTextField: UITextField!
     
     var delegate: AddDelegate?
+    
+    var matchingItems:[MKMapItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,12 +51,59 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             
         } else {
             
-            let newActivity = Activity(name: nameTextField.text, description: descriptionTextView.text)
+            // Get GeoPoint of location suggested
+            matchingItems = getLocation()
+            if matchingItems.count == 0 {
+                // Throw an error
+                let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+                
+                let alertController = UIAlertController(title: "Error", message: "No location matches found.", preferredStyle: .alert)
+                
+                // Now adding the default action to the alert controller
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+                return
+            }
             
-            delegate?.didSaveActivity(activity: newActivity!) // Use delegate
+            let mapItem = matchingItems[0]
+            
+            let newActivity = Activity(name: nameTextField.text, description: descriptionTextView.text, location: mapItem)
+            
+            delegate?.didSaveActivity(activity: newActivity!)
             
             self.dismiss(animated: true, completion:  nil)
         }
     }
     
+    func getLocation() -> [MKMapItem] {
+        
+        matchingItems.removeAll()
+        let searchBarText = locationTextField.text
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = searchBarText
+        let search = MKLocalSearch(request: request)
+        
+        search.start(completionHandler: {(response, error) in
+            if error != nil {
+                print("Error occured in search: \(error!.localizedDescription)")
+            } else if response!.mapItems.count == 0 {
+                print("No matches found")
+            } else {
+                print("Matches found")
+                
+                for item in response!.mapItems {
+                    print("Name = \(String(describing: item.name))")
+                    //print("Phone = \(item.phoneNumber)")
+                    
+                    self.matchingItems.append(item as MKMapItem)
+                }
+            }
+        })
+        
+         print("Matching items = \(self.matchingItems.count)")
+        
+        return matchingItems
+    }
 }
