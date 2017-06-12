@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Alamofire
+import Realm
 
 class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate {
     
@@ -71,15 +72,34 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                 return
             }
             
-            let geo = GeoPoint(latitude: (matchingItem!.placemark.location?.coordinate.latitude)!, longitude: (matchingItem!.placemark.location?.coordinate.longitude)!)
+            //let geo = GeoPoint(latitude: (matchingItem!.placemark.location?.coordinate.latitude)!, longitude: (matchingItem!.placemark.location?.coordinate.longitude)!)
             
             let date = Date()
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy"
             let currentDate = formatter.string(from: date)
             
-            let newActivity = Activity(name: nameTextField.text, description: descriptionTextView.text, location: geo, locationName: matchingItem?.name, date: currentDate)
+            let newActivity = Activity()
+            newActivity.name = nameTextField.text!
+            newActivity.descr = descriptionTextView.text
+            //newActivity.location = geo
+            newActivity.lat = (matchingItem!.placemark.location?.coordinate.latitude)!
+            newActivity.lng = (matchingItem!.placemark.location?.coordinate.longitude)!
+            newActivity.locationName = (matchingItem?.name)!
+            newActivity.date = currentDate
             
+            let realm = RLMRealm.default()
+            realm.beginWriteTransaction()
+            realm.add(newActivity)
+            
+            do {
+                try realm.commitWriteTransactionWithoutNotifying([])
+            } catch {
+                print("Error")
+            }
+
+            
+            /*
             Alamofire.request("https://ixlocation-689b0.firebaseio.com/activities.json", method: .post, parameters: newActivity?.toJSON(), encoding: JSONEncoding.default).responseJSON { response in
                 
                 switch response.result {
@@ -91,7 +111,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                 }
                 
             }
-            
+            */
             self.dismiss(animated: true, completion:  nil)
         }
     }

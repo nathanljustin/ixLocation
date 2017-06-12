@@ -9,15 +9,22 @@
 import UIKit
 import Gloss
 import Alamofire
+import Realm
 
 class ActivityLogViewController: UITableViewController, AddDelegate {
 
-    var activities: [Activity] = []
+    var activities: RLMResults<Activity> {
+        get {
+            return Activity.allObjects() as! RLMResults<Activity>
+        }
+    }
+    //var activities: [Activity] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        /*
         Alamofire.request("https://ixlocation-689b0.firebaseio.com/activities.json").responseJSON { response in
             //print(response.request)  // original URL request
             //print(response.response) // HTTP URL response
@@ -54,6 +61,11 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
             }
             }
         }
+ */
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
     
     func convertToDictionary(text: String) -> [String: Any]? {
@@ -78,18 +90,18 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activities.count
+        return Int(activities.count)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
         
         // Configure the cell...
-        cell.nameLabel.text = activities[indexPath.row].name
+        cell.nameLabel.text = activities[UInt(indexPath.row)].name
         
-        cell.dateLabel.text = activities[indexPath.row].date
+        cell.dateLabel.text = activities[UInt(indexPath.row)].date
         
-        cell.locationLabel.text = activities[indexPath.row].locationName
+        cell.locationLabel.text = activities[UInt(indexPath.row)].locationName
         
         // Choose picture here...
         
@@ -97,7 +109,7 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
     }
     
     func didSaveActivity(activity: Activity) {
-        activities.append(activity)
+        //activities.append(activity)
         self.tableView.reloadData() // will call table view functions again
     }
     
@@ -110,7 +122,7 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
             let indexPath = self.tableView.indexPath(for: cell)
             
             // Pass that activity to ActivityDetailViewController
-            activityViewController.activity = activities[(indexPath?.row)!]
+            activityViewController.activity = activities[UInt((indexPath?.row)!)]
         }
         if segue.identifier == "addSegue" {
             let navigationViewController = segue.destination as! UINavigationController

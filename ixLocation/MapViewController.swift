@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Alamofire
 import Gloss
+import Realm
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, AddDelegate {
     
@@ -17,7 +18,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     var locationManager: CLLocationManager!
     var currentUserLocation: CLLocation!
-    var activities: [Activity] = []
+    var activities: RLMResults<Activity> {
+        get {
+            return Activity.allObjects() as! RLMResults<Activity>
+        }
+    }
 
     override func viewDidLoad() {
         
@@ -42,7 +47,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         }
-        
+        if activities.count != 0 {
+        for index in 0...(activities.count - 1) {
+            let annotation = MKPointAnnotation()
+            //annotation.coordinate = CLLocationCoordinate2DMake((activities[index].location.lat), (activities[index].location.lng));
+            annotation.coordinate = CLLocationCoordinate2DMake((activities[index].lat), (activities[index].lng));
+            annotation.title = activities[index].name
+            self.map.addAnnotation(annotation)
+        }
+        }
+        /*
         Alamofire.request("https://ixlocation-689b0.firebaseio.com/activities.json").responseJSON { response in
             //print(response.request)  // original URL request
             //print(response.response) // HTTP URL response
@@ -81,7 +95,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }
             }
         }
-
+*/
         
         setMapType()
 
@@ -89,7 +103,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidAppear(_ animated: Bool) {
         
-        setMapType()
+        //setMapType()
+        viewDidLoad()
         
     }
 
@@ -141,7 +156,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func didSaveActivity(activity: Activity) {
         let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake((activity.location.lat), (activity.location.lng));
+        annotation.coordinate = CLLocationCoordinate2DMake((activity.lat), (activity.lng));
         annotation.title = activity.name
         map.addAnnotation(annotation)
     }

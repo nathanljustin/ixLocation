@@ -10,5 +10,6 @@ target 'ixLocation' do
  # Pods for ixLocation
   pod 'Alamofire', '~> 4.4'
   pod 'Gloss', '~> 1.2'
+  pod 'RealmSwift'
 
 end
