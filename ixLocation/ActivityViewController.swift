@@ -25,7 +25,7 @@ class ActivityViewController: UIViewController {
         nameLabel.text = activity?.name
         descriptionLabel.text = activity?.description
         locationLabel.text = activity?.locationName
-        image.image = activity?.image
+        //image.image = activity?.image
     }
 
     override func didReceiveMemoryWarning() {

@@ -51,6 +51,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             self.present(alertController, animated: true, completion: nil)
             
+            return
+            
         } else {
             
             // Get GeoPoint of location suggested
@@ -71,7 +73,12 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             let geo = GeoPoint(latitude: (matchingItem!.placemark.location?.coordinate.latitude)!, longitude: (matchingItem!.placemark.location?.coordinate.longitude)!)
             
-            let newActivity = Activity(name: nameTextField.text, description: descriptionTextView.text, location: geo, locationName: matchingItem?.name)
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            let currentDate = formatter.string(from: date)
+            
+            let newActivity = Activity(name: nameTextField.text, description: descriptionTextView.text, location: geo, locationName: matchingItem?.name, date: currentDate)
             
             Alamofire.request("https://ixlocation-689b0.firebaseio.com/activities.json", method: .post, parameters: newActivity?.toJSON(), encoding: JSONEncoding.default).responseJSON { response in
                 
@@ -118,6 +125,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         search.start(completionHandler: {(response, error) in
             if error != nil {
                 print("Error occured in search: \(error!.localizedDescription)")
+                self.locationTextField.backgroundColor = UIColor.red
             }
             else if response!.mapItems.count == 0 {
                 let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
@@ -136,6 +144,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                 
                 self.matchingItem = response!.mapItems[0]
                 print("Matching item = \(String(describing: self.matchingItem))")
+                
+                self.locationTextField.backgroundColor = UIColor.green
             }
         })
  

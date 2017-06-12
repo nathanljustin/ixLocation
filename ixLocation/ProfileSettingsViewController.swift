@@ -30,11 +30,5 @@ class ProfileSettingsViewController: UIViewController {
         name = nameText.text
         UserDefaults.standard.set(name, forKey: "name")
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let settingVC = segue.destination as? SettingsViewController {
-                settingVC.name.text = name
-        }
-    }
-    
+
 }

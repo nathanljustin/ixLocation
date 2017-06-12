@@ -37,6 +37,7 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
                         activity?.name = actDictionary["name"] as! String
                         activity?.description = actDictionary["description"] as! String
                         activity?.locationName = actDictionary["locationName"] as! String
+                        activity?.date = actDictionary["date"] as! String
                         
                         if let geoPointDictionary = actDictionary["location"] as? [String: AnyObject] {
                             let location = GeoPoint()
@@ -86,10 +87,7 @@ class ActivityLogViewController: UITableViewController, AddDelegate {
         // Configure the cell...
         cell.nameLabel.text = activities[indexPath.row].name
         
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        cell.dateLabel.text = formatter.string(from: date)
+        cell.dateLabel.text = activities[indexPath.row].date
         
         cell.locationLabel.text = activities[indexPath.row].locationName
         

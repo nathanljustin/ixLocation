@@ -61,6 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         activity?.name = actDictionary["name"] as! String
                         activity?.description = actDictionary["description"] as! String
                         activity?.locationName = actDictionary["locationName"] as! String
+                        activity?.date = actDictionary["date"] as! String
                         
                         if let geoPointDictionary = actDictionary["location"] as? [String: AnyObject] {
                             let location = GeoPoint()

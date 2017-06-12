@@ -17,6 +17,7 @@ class Activity: Decodable, Glossy {
     var image: UIImage?
     var location: GeoPoint
     var locationName: String
+    var date: String
     
     init?() {
         self.name = ""
@@ -24,14 +25,16 @@ class Activity: Decodable, Glossy {
         self.image = nil
         self.location = GeoPoint(latitude: 0.0, longitude: 0.0)
         self.locationName = ""
+        self.date = ""
     }
     
-    init?(name: String?, description: String?, location: GeoPoint, locationName: String?) {
+    init?(name: String?, description: String?, location: GeoPoint, locationName: String?, date: String?) {
         self.name = name!
         self.description = description!
         self.image = nil
         self.location = location
         self.locationName = locationName!
+        self.date = date!
     }
     
     required init?(json: JSON) {
@@ -39,6 +42,7 @@ class Activity: Decodable, Glossy {
         self.description = ("description" <~~ json)!
         self.location = ("location" <~~ json)!
         self.locationName = ("locationName" <~~ json)!
+        self.date = ("date" <~~ json)!
     }
     
     func toJSON() -> JSON? {
@@ -46,7 +50,8 @@ class Activity: Decodable, Glossy {
             "name" ~~> self.name,
             "description" ~~> self.description,
             "location" ~~> self.location,
-            "locationName" ~~> self.locationName
+            "locationName" ~~> self.locationName,
+            "date" ~~> self.date
             ])
     }
     
